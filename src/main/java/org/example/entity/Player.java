@@ -153,7 +153,7 @@ public class Player extends Entity {
 					System.out.println("Item = " + gp.objects[index].name);
 					gp.objects[index] = null;
 					gp.playSoundEffect(2);
-					gp.ui.showTempMessage("You picked up a boot!", 3000);
+					gp.ui.showTempMessage("Speed increased by 2!", 3000);
 				}
 				
 

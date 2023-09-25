@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	@Override
 	public void run() {
-		double delay = 1_000_000_000 / fps;
+		double delay = (double) 1_000_000_000 / fps;
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long now;

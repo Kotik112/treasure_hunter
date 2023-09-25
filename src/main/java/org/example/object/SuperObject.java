@@ -5,6 +5,12 @@ import org.example.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+* SuperObject class that represents a generic object in the game and is the parent class
+* of all the other object classes in the game.
+* The SuperObject class includes functionality for drawing the object on the screen and managing
+* the object's state.
+* */
 public class SuperObject {
 	public BufferedImage image;
 	public String name;

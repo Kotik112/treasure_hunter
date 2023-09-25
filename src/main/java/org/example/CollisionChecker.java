@@ -2,6 +2,10 @@ package org.example;
 
 import org.example.entity.Entity;
 
+
+/**
+ *
+* */
 public class CollisionChecker {
 	GamePanel gp;
 	public CollisionChecker(GamePanel gp) {

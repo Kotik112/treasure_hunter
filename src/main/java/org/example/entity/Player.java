@@ -25,7 +25,7 @@ public class Player extends Entity {
 	public final int screenX, screenY;
 	//Player Inventory
 	public List<SuperObject> inventory;
-	int hasKeys = 0;
+	public int hasKeys = 0;
 
 	/**
 	 * Constructs a new player object with the default screenX and screenY values.
@@ -119,6 +119,7 @@ public class Player extends Entity {
 					inventory.add(gp.objects[index]);
 					gp.objects[index] = null;
 					gp.playSoundEffect(2);
+					gp.ui.showTempMessage("You picked up a key!", 3000);
 				}
 				case "door" -> {
 					Door door = (Door) gp.objects[index];
@@ -129,6 +130,10 @@ public class Player extends Entity {
 							inventory.remove(gp.objects[index]);
 							gp.objects[index] = null;
 							gp.playSoundEffect(3);
+							gp.ui.showTempMessage("You unlocked the door!", 3000);
+						}
+						else {
+							gp.ui.showTempMessage("You need a key to unlock this door!", 3000);
 						}
 					}
 				}
@@ -139,6 +144,8 @@ public class Player extends Entity {
 						gp.playSoundEffect(4);
 						chest.soundPlayed = true;
 					}
+					gp.ui.showTempMessage("You opened the chest!", 3000);
+					gp.music.stop();
 					
 				}
 				case "boot" -> {
@@ -146,6 +153,7 @@ public class Player extends Entity {
 					System.out.println("Item = " + gp.objects[index].name);
 					gp.objects[index] = null;
 					gp.playSoundEffect(2);
+					gp.ui.showTempMessage("You picked up a boot!", 3000);
 				}
 				
 

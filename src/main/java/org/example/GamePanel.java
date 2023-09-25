@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public CollisionChecker cc = new CollisionChecker(this);
 	public AssetSetter as = new AssetSetter(this);
 	public Player player = new Player(this, keyHandler);
+	public UI ui = new UI(this);
 	private final int MAX_OBJECTS = 10;
 	public SuperObject[] objects = new SuperObject[MAX_OBJECTS];
 	
@@ -35,7 +36,8 @@ public class GamePanel extends JPanel implements Runnable {
 	// Game loop settings
 	int fps = 60;
 	
-	// Sound class
+	// Sound & Music class
+	public Sound music = new Sound();
 	Sound sound = new Sound();
 	
 	public GamePanel() {
@@ -50,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setupGame() {
 		as.setObject();
-		playMusic(0);
+		playMusic();
 	}
 	
 	public void startGameThread() {
@@ -95,39 +97,31 @@ public class GamePanel extends JPanel implements Runnable {
 				object.draw(g2, this);
 			}
 		}
-		
 		player.draw(g2);
+		ui.draw(g2);
 		g2.dispose();
 	}
 	
 	/**
-	 * Plays a music track in a loop..
-	 * Index summary:
-	 * 0 = Player walking
-	 * 1 = Coin Sound
-	 * 2 = Level Up Sound
-	 * 3 = Unlock Sound
-	 * 4 = Fanfare Sound
-	 *
-	 * @param soundIndex The index of the sound to be played.
+	 * Plays a music track in a loop.
 	 * */
-	public void playMusic(int soundIndex) {
-		sound.setFile(soundIndex);
-		sound.play();
-		sound.loop();
+	public void playMusic() {
+		music.setFile(0);
+		music.play();
+		music.loop();
 	}
 	
 	/**
-	 * Stops the currently playing music track.
+	 * Stops playing music track.
 	 * */
 	public void stopMusic() {
-		sound.stop();
+		music.stop();
 	}
 	
 /**
 	 * Plays a sound effect.
 	 * Index summary:
-	 * 0 = Player walking
+	 * 0 = Main game theme
 	 * 1 = Coin Sound
 	 * 2 = Level Up Sound
 	 * 3 = Unlock Sound

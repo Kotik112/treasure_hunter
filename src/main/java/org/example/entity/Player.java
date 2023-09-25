@@ -2,6 +2,7 @@ package org.example.entity;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
+import org.example.object.Chest;
 import org.example.object.Door;
 import org.example.object.SuperObject;
 
@@ -117,6 +118,7 @@ public class Player extends Entity {
 					hasKeys++;
 					inventory.add(gp.objects[index]);
 					gp.objects[index] = null;
+					gp.playSoundEffect(2);
 				}
 				case "door" -> {
 					Door door = (Door) gp.objects[index];
@@ -124,13 +126,28 @@ public class Player extends Entity {
 						if (hasKeys > 0) {
 							door.open();
 							hasKeys--;
-							// inventory.add(gp.objects[index]); // Doors should not go into inventory
+							inventory.remove(gp.objects[index]);
 							gp.objects[index] = null;
+							gp.playSoundEffect(3);
 						}
 					}
 				}
-				case "chest" ->
+				case "chest" -> {
+					Chest chest = (Chest) gp.objects[index];
+					chest.image = chest.imageOpen;
+					if(!chest.soundPlayed) {
+						gp.playSoundEffect(4);
+						chest.soundPlayed = true;
+					}
+					
+				}
+				case "boot" -> {
+					speed += 2;
+					System.out.println("Item = " + gp.objects[index].name);
 					gp.objects[index] = null;
+					gp.playSoundEffect(2);
+				}
+				
 
 			}
 			System.out.println("Player inventory: " + inventory);

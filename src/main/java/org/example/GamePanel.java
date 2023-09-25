@@ -31,11 +31,12 @@ public class GamePanel extends JPanel implements Runnable {
 	// World settings
 	public final int maxWorldCol = 50;
 	public final int maxWorldRow = 50;
-	public final int worldWidth = tileSize * maxWorldCol;
-	public final int worldHeight = tileSize * maxWorldRow;
 	
 	// Game loop settings
 	int fps = 60;
+	
+	// Sound class
+	Sound sound = new Sound();
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setupGame() {
 		as.setObject();
+		playMusic(0);
 	}
 	
 	public void startGameThread() {
@@ -96,6 +98,46 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		player.draw(g2);
 		g2.dispose();
+	}
+	
+	/**
+	 * Plays a music track in a loop..
+	 * Index summary:
+	 * 0 = Player walking
+	 * 1 = Coin Sound
+	 * 2 = Level Up Sound
+	 * 3 = Unlock Sound
+	 * 4 = Fanfare Sound
+	 *
+	 * @param soundIndex The index of the sound to be played.
+	 * */
+	public void playMusic(int soundIndex) {
+		sound.setFile(soundIndex);
+		sound.play();
+		sound.loop();
+	}
+	
+	/**
+	 * Stops the currently playing music track.
+	 * */
+	public void stopMusic() {
+		sound.stop();
+	}
+	
+/**
+	 * Plays a sound effect.
+	 * Index summary:
+	 * 0 = Player walking
+	 * 1 = Coin Sound
+	 * 2 = Level Up Sound
+	 * 3 = Unlock Sound
+	 * 4 = Fanfare Sound
+	 *
+	 * @param soundIndex The index of the sound to be played.
+	 * */
+	public void playSoundEffect(int soundIndex) {
+		sound.setFile(soundIndex);
+		sound.play();
 	}
 }
 

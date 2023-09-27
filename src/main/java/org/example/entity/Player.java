@@ -126,8 +126,8 @@ public class Player extends Entity {
 					if (door.collision) {
 						if (hasKeys > 0) {
 							door.open();
+							removeKey();
 							hasKeys--;
-							inventory.remove(gp.objects[index]);
 							gp.objects[index] = null;
 							gp.playSoundEffect(3);
 							gp.ui.showTempMessage("You unlocked the door!", 3000);
@@ -149,11 +149,10 @@ public class Player extends Entity {
 					
 				}
 				case "boot" -> {
-					speed += 2;
-					System.out.println("Item = " + gp.objects[index].name);
+					speed += 1;
 					gp.objects[index] = null;
 					gp.playSoundEffect(2);
-					gp.ui.showTempMessage("Speed increased by 2!", 3000);
+					gp.ui.showTempMessage("Speed increased by 1!", 3000);
 				}
 				
 
@@ -230,5 +229,16 @@ public class Player extends Entity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean removeKey() {
+		//if (hasKeys <= 0) return false;
+		for (var key : inventory) {
+			if (key.name.equals("key")) {
+				inventory.remove(key);
+				return true;
+			}
+		}
+		return false;
 	}
 }
